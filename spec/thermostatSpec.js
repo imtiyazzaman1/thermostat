@@ -41,7 +41,20 @@ describe('Thermostat', function (){
       thermostat.temp = 25;
       expect(function() { thermostat.up(); } ).toThrow('Temperature cannot be higher than 25 while power saving mode is on');
     });
-  });
 
+    it('does raise the temp above 25 when off', function () {
+      thermostat.isPowerSaving = false;
+      thermostat.temp = 25;
+      thermostat.up();
+      expect(thermostat.temp).toEqual(26);
+    })
+
+    it('does not raise the temp above 32 when off', function () {
+      thermostat.isPowerSaving = false;
+      thermostat.temp = 32;
+      expect(function() { thermostat.up(); } ).toThrow('Temperature cannot be higher than 32');
+
+    })
+  });
 
 });
