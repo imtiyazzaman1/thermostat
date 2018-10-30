@@ -10,7 +10,11 @@ function Thermostat() {
 Thermostat.prototype.up = function () {
   if (this.isPowerSaving && this.temp == 25) {
     throw 'Temperature cannot be higher than 25 while power saving mode is on';
-  } else {
+  }
+  else if (!this.isPowerSaving && this.temp == 32) {
+    throw 'Temperature cannot be higher than 32';
+  }
+  else {
     this.temp++
   }
 };

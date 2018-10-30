@@ -8,6 +8,10 @@ describe('Thermostat', function (){
     expect(thermostat.temp).toEqual(20);
   });
 
+  it("should have power saving on by default", function() {
+    expect(thermostat.isPowerSaving).toBe(true);
+  });
+
   describe('#up', function () {
 
     it('increases the temperature by 1', function () {
