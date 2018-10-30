@@ -16,4 +16,12 @@ describe('Thermostat', function (){
     });
 
   });
+  describe('#down', function () {
+
+    it('decreases the temperature by 1', function () {
+      thermostat.up();
+      expect(thermostat.temp).toEqual(19);
+    });
+
+  });
 });
