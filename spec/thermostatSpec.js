@@ -61,7 +61,7 @@ describe('Thermostat', function (){
     })
   });
 
-  describe('#method', function () {
+  describe('#reset', function () {
 
     it('reset temperature to 20', function functionName() {
       thermostat.temp = 25;
@@ -70,5 +70,22 @@ describe('Thermostat', function (){
     })
 
   });
+
+  describe('#usage', function () {
+
+    it('should return low usage when temp below 18', function () {
+      thermostat.temp = 17;
+      expect(thermostat.usage).toEqual('low-usage')
+    });
+
+    it('should return medium usage when temp below 25', function () {
+      expect(thermostat.usage).toEqual('medium-usage')
+    });
+
+    it('should return high usage if temp above 25', function () {
+      thermostat.temp = 25;
+      expect(thermostat.usage).toEqual('high-usage')
+    });
+  })
 
 });
