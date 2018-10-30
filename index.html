@@ -4,9 +4,44 @@
 
 <head>
    <title>Thermostat</title>
+
 </head>
 
 <body>
+  <a href="http://jquery.com/">jQuery</a>
+  <script src="jquery.js"></script>
+
+  <script>
+    $( document ).ready(function() {
+      var thermostat = new Thermostat();
+
+      $("h1").text( thermostat.temp )
+
+      $( "#tempUp" ).click(function( event ) {
+        thermostat.up();
+
+        $("h1").text( thermostat.temp )
+      });
+
+      $( "#tempDown" ).click(function( event ) {
+        thermostat.down();
+
+        $("h1").text( thermostat.temp )
+      });
+
+      $( "#reset" ).click(function( event ) {
+        thermostat.reset();
+
+        $("h1").text( thermostat.temp )
+      });
+
+      $( "#switchPowerSaving" ).click(function( event ) {
+        thermostat.switchPowerSaving();
+      });
+
+    });
+  </script>
+
   <section>
   <h1 id='temperature'></h1>
     <p>
