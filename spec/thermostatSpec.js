@@ -7,7 +7,7 @@ describe('Thermostat', function (){
   });
 
   it("should have a starting temperature of 20", function() {
-    expect(thermostat.temp).toEqual(20);
+    expect(thermostat.temp).toEqual(STARTING_TEMP);
   });
 
   it("should have power saving on by default", function() {
@@ -35,7 +35,7 @@ describe('Thermostat', function (){
   describe('.minTemp', function () {
 
     it('does not lower the temp below 10', function () {
-      thermostat.temp = 10;
+      thermostat.temp = MINIMUM_TEMP;
       expect(function() { thermostat.down(); } ).toThrow('Temperature cannot be lower than 10');
     });
   });
@@ -44,20 +44,20 @@ describe('Thermostat', function (){
 
     it('does not raise the temp above 25 when on', function () {
       thermostat.isPowerSaving = true
-      thermostat.temp = 25;
+      thermostat.temp = MAX_TEMP_PSM_ON;
       expect(function() { thermostat.up(); } ).toThrow('Temperature cannot be higher than 25');
     });
 
     it('does raise the temp above 25 when off', function () {
       thermostat.isPowerSaving = false;
-      thermostat.temp = 25;
+      thermostat.temp = MAX_TEMP_PSM_ON;
       thermostat.up();
       expect(thermostat.temp).toEqual(26);
     })
 
     it('does not raise the temp above 32 when off', function () {
       thermostat.isPowerSaving = false;
-      thermostat.temp = 32;
+      thermostat.temp = MAX_TEMP_PSM_OFF;
       expect(function() { thermostat.up(); } ).toThrow('Temperature cannot be higher than 32');
 
     })
@@ -66,9 +66,9 @@ describe('Thermostat', function (){
   describe('#reset', function () {
 
     it('reset temperature to 20', function functionName() {
-      thermostat.temp = 25;
+      thermostat.temp = MAX_TEMP_PSM_ON;
       thermostat.reset();
-      expect(thermostat.temp).toEqual(20);
+      expect(thermostat.temp).toEqual(STARTING_TEMP);
     })
 
   });
@@ -85,30 +85,24 @@ describe('Thermostat', function (){
     });
 
     it('should return high usage if temp above 25', function () {
-      thermostat.temp = 25;
+      thermostat.temp = MAX_TEMP_PSM_ON;
       expect(thermostat.usage()).toEqual('high-usage')
     });
   })
 
  describe('#switchPowerSaving', function () {
+
    it('switches power saving off', function(){
      thermostat.switchPowerSaving();
      expect(thermostat.isPowerSaving).toBe(false)
-   })
+   });
+
    it('switches power saving on', function(){
      thermostat.isPowerSaving = false
      thermostat.switchPowerSaving();
      expect(thermostat.isPowerSaving).toBe(true)
-   })
+   });
+
  })
-
-
-
-
-
-
-
-
-
 
 });
