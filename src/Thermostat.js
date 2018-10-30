@@ -21,6 +21,18 @@ Thermostat.prototype.reset = function () {
   this.temp = STARTING_TEMP
 };
 
+Thermostat.prototype.usage = function () {
+  if (this.temp < 18) {
+    return 'low-usage';
+  }
+  else if (this.temp < 25) {
+    return 'medium-usage';
+  }
+  else {
+    return 'high-usage';
+  }
+};
+
 Thermostat.prototype._checkPowerSaving = function () {
   if (this.temp === this._maxTemp()) {
     throw('Temperature cannot be higher than ' + this._maxTemp())

@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Thermostat', function (){
   var thermostat;
   beforeEach(function (){
@@ -75,17 +77,38 @@ describe('Thermostat', function (){
 
     it('should return low usage when temp below 18', function () {
       thermostat.temp = 17;
-      expect(thermostat.usage).toEqual('low-usage')
+      expect(thermostat.usage()).toEqual('low-usage')
     });
 
     it('should return medium usage when temp below 25', function () {
-      expect(thermostat.usage).toEqual('medium-usage')
+      expect(thermostat.usage()).toEqual('medium-usage')
     });
 
     it('should return high usage if temp above 25', function () {
       thermostat.temp = 25;
-      expect(thermostat.usage).toEqual('high-usage')
+      expect(thermostat.usage()).toEqual('high-usage')
     });
   })
+
+ describe('#switchPowerSaving', function () {
+   it('switches power saving off', function(){
+     thermostat.switchPowerSaving();
+     expect(thermostat.isPowerSaving).toBe(false)
+   })
+   it('switches power saving on', function(){
+     thermostat.isPowerSaving = false
+     thermostat.switchPowerSaving();
+     expect(thermostat.isPowerSaving).toBe(true)
+   })
+ })
+
+
+
+
+
+
+
+
+
 
 });
