@@ -17,25 +17,27 @@ Thermostat.prototype.down = function () {
   this.temp--
 };
 
+Thermostat.prototype.reset = function () {
+  this.temp = STARTING_TEMP
+};
+
 Thermostat.prototype._checkPowerSaving = function () {
-  if (this._powerSavingOnMax()) {
-    throw 'Temperature cannot be higher than 25 while power saving mode is on';
+  if (this.temp === this._maxTemp()) {
+    throw('Temperature cannot be higher than ' + this._maxTemp())
   }
-  else if (this._powerSavingOffMax()) {
-    throw 'Temperature cannot be higher than 32';
-  }
-};
-
-Thermostat.prototype._powerSavingOnMax = function () {
-  return this.isPowerSaving && this.temp == 25;
-};
-
-Thermostat.prototype._powerSavingOffMax = function () {
-  return !this.isPowerSaving && this.temp == 32
 };
 
 Thermostat.prototype._checkMinTemp = function () {
   if(this.temp<=this.minTemp) {
     throw 'Temperature cannot be lower than 10';
+  }
+};
+
+Thermostat.prototype._maxTemp = function () {
+  if(this.isPowerSaving) {
+    return 25;
+  }
+  else {
+    return 32;
   }
 };

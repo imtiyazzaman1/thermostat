@@ -43,7 +43,7 @@ describe('Thermostat', function (){
     it('does not raise the temp above 25 when on', function () {
       thermostat.isPowerSaving = true
       thermostat.temp = 25;
-      expect(function() { thermostat.up(); } ).toThrow('Temperature cannot be higher than 25 while power saving mode is on');
+      expect(function() { thermostat.up(); } ).toThrow('Temperature cannot be higher than 25');
     });
 
     it('does raise the temp above 25 when off', function () {
