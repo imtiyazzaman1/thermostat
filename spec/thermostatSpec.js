@@ -30,8 +30,18 @@ describe('Thermostat', function (){
 
     it('does not lower the temp below 10', function () {
       thermostat.temp = 10;
-      expect(thermostat.down).toThrow('Temperature cannot be lower than 10');
+      expect(function() { thermostat.down(); } ).toThrow('Temperature cannot be lower than 10');
     });
-
   });
+
+  describe('.isPowerSaving', function () {
+
+    it('does not raise the temp above 25 when on', function () {
+      thermostat.isPowerSaving = true
+      thermostat.temp = 25;
+      expect(function() { thermostat.up(); } ).toThrow('Temperature cannot be higher than 25 while power saving mode is on');
+    });
+  });
+
+
 });
