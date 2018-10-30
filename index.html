@@ -12,27 +12,25 @@
   <script src="jquery.js"></script>
 
   <script>
-    $( document ).ready(function() {
+      $( document ).ready(function() {
       var thermostat = new Thermostat();
 
-      $("h1").text( thermostat.temp )
+      $('#temperature').text( thermostat.temp )
+
+      $(document).click(function() {
+        $('#temperature').text( thermostat.temp )
+      });
 
       $( "#tempUp" ).click(function( event ) {
         thermostat.up();
-
-        $("h1").text( thermostat.temp )
       });
 
       $( "#tempDown" ).click(function( event ) {
         thermostat.down();
-
-        $("h1").text( thermostat.temp )
       });
 
       $( "#reset" ).click(function( event ) {
         thermostat.reset();
-
-        $("h1").text( thermostat.temp )
       });
 
       $( "#switchPowerSaving" ).click(function( event ) {
