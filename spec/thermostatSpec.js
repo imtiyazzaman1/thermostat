@@ -16,11 +16,21 @@ describe('Thermostat', function (){
     });
 
   });
+
   describe('#down', function () {
 
     it('decreases the temperature by 1', function () {
-      thermostat.up();
+      thermostat.down();
       expect(thermostat.temp).toEqual(19);
+    });
+
+  });
+
+  describe('.minTemp', function () {
+
+    it('does not lower the temp below 10', function () {
+      thermostat.temp = 10;
+      expect(thermostat.down).toThrow('Temperature cannot be lower than 10');
     });
 
   });
