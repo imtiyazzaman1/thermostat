@@ -8,21 +8,34 @@ function Thermostat() {
 }
 
 Thermostat.prototype.up = function () {
-  if (this.isPowerSaving && this.temp == 25) {
-    throw 'Temperature cannot be higher than 25 while power saving mode is on';
-  }
-  else if (!this.isPowerSaving && this.temp == 32) {
-    throw 'Temperature cannot be higher than 32';
-  }
-  else {
-    this.temp++
-  }
+  this._checkPowerSaving();
+  this.temp++
 };
 
 Thermostat.prototype.down = function () {
-    if(this.temp<=this.minTemp) {throw 'Temperature cannot be lower than 10';
+  this._checkMinTemp();
+  this.temp--
+};
+
+Thermostat.prototype._checkPowerSaving = function () {
+  if (this._powerSavingOnMax()) {
+    throw 'Temperature cannot be higher than 25 while power saving mode is on';
   }
-  else {
-    this.temp--
+  else if (this._powerSavingOffMax()) {
+    throw 'Temperature cannot be higher than 32';
+  }
+};
+
+Thermostat.prototype._powerSavingOnMax = function () {
+  return this.isPowerSaving && this.temp == 25;
+};
+
+Thermostat.prototype._powerSavingOffMax = function () {
+  return !this.isPowerSaving && this.temp == 32
+};
+
+Thermostat.prototype._checkMinTemp = function () {
+  if(this.temp<=this.minTemp) {
+    throw 'Temperature cannot be lower than 10';
   }
 };
