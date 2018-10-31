@@ -35,8 +35,13 @@ Thermostat.prototype.usage = function () {
   }
 }
 
-Thermostat.prototype.switchPowerSaving = function () {
-  this.isPowerSaving = !this.isPowerSaving
+Thermostat.prototype.switchPowerSavingOn = function () {
+  if (this.temp > MAX_TEMP_PSM_ON) this.temp = MAX_TEMP_PSM_ON
+  this.isPowerSaving = true
+}
+
+Thermostat.prototype.switchPowerSavingOff = function () {
+  this.isPowerSaving = false
 }
 
 Thermostat.prototype._checkPowerSaving = function () {

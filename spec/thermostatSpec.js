@@ -81,16 +81,23 @@ describe('Thermostat', function () {
     })
   })
 
-  describe('#switchPowerSaving', function () {
-    it('switches power saving off', function () {
-      thermostat.switchPowerSaving()
-      expect(thermostat.isPowerSaving).toBe(false)
-    })
-
+  describe('#switchPowerSavingOn', function () {
     it('switches power saving on', function () {
       thermostat.isPowerSaving = false
-      thermostat.switchPowerSaving()
+      thermostat.switchPowerSavingOn()
       expect(thermostat.isPowerSaving).toBe(true)
+    })
+    it('resets the temp if it is above the max', function () {
+      thermostat.isPowerSaving = false
+      thermostat.temp = 26
+      thermostat.switchPowerSavingOn()
+      expect(thermostat.temp).toEqual(MAX_TEMP_PSM_ON)
+    })
+  })
+  describe('#switchPowerSavingoff', function () {
+    it('switches power saving off', function () {
+      thermostat.switchPowerSavingOff()
+      expect(thermostat.isPowerSaving).toBe(false)
     })
   })
 })
