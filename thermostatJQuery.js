@@ -32,25 +32,30 @@ $( document ).ready(function() {
     $('#power-saving-status').text("off")
   });
 
-  $.ajax({
-    url: "api.openweathermap.org/data/2.5/weather",
+  var request = $.ajax({
+    url: "http://api.openweathermap.org/data/2.5/weather",
     data: {
         q: "London,uk",
-        APPID: "3468bebd68f9567aac8f3faaad4f166e"
+        APPID: "3468bebd68f9567aac8f3faaad4f166e",
+        units: "metric"
     },
     type: "GET",
-    dataType : "json",
+    dataType : "json"
   })
-    .fail(function( xhr, status, errorThrown ) {
-    alert( "Sorry, there was a problem!" );
-    console.log( "Error: " + errorThrown );
-    console.log( "Status: " + status );
-    console.dir( xhr );
-    })
 
-    .always(function( xhr, status ) {
-      alert( "The request is complete!" );
-      console.log("HELLO!");
-    });
+  request.done(function(json) {
+    $("#weather").text(json.main.temp)
+  })
+
+  request.fail(function( xhr, status, errorThrown ) {
+  alert( "Sorry, there was a problem!" );
+  console.log( "Error: " + errorThrown );
+  console.log( "Status: " + status );
+  console.dir( xhr );
+  })
+
+  request.always(function( xhr, status ) {
+    alert( "The request is complete!" );
+  });
 
 });
