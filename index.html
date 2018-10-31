@@ -4,44 +4,14 @@
 
 <head>
    <title>Thermostat</title>
-
+   <style>
+      .low-usage { color: green; }
+      .medium-usage { color: black; }
+      .high-usage { color: red; }
+   </style>
 </head>
 
 <body>
-  <script src="jquery.js"></script>
-
-  <script>
-      $( document ).ready(function() {
-      var thermostat = new Thermostat();
-
-      $('#temperature').text( thermostat.temp )
-
-      $(document).click(function() {
-        $('#temperature').text( thermostat.temp )
-      });
-
-      $( "#tempUp" ).click(function( event ) {
-        thermostat.up();
-      });
-
-      $( "#tempDown" ).click(function( event ) {
-        thermostat.down();
-      });
-
-      $( "#reset" ).click(function( event ) {
-        thermostat.reset();
-      });
-
-      $( "#switchPowerSavingOn" ).click(function( event ) {
-        thermostat.switchPowerSavingOn();
-      });
-      $( "#switchPowerSavingOff" ).click(function( event ) {
-        thermostat.switchPowerSavingOff();
-      });
-
-    });
-  </script>
-
   <section>
   <h1 id='temperature'></h1>
     <p>
@@ -64,6 +34,8 @@
     </p>
   </section>
   <script src='./src/Thermostat.js'></script>
+  <script src="js/jquery.js"></script>
+  <script src="thermostatJQuery.js"></script>
 </body>
 
 </html>
