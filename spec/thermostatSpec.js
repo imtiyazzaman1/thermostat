@@ -100,4 +100,14 @@ describe('Thermostat', function () {
       expect(thermostat.isPowerSaving).toBe(false)
     })
   })
+
+  describe('#powerSavingStatus', function () {
+    it('returns on when PSM is on', function () {
+      expect(thermostat.powerSavingStatus()).toEqual('On')
+    })
+    it('returns off when PSM is off', function () {
+      thermostat.isPowerSaving = false
+      expect(thermostat.powerSavingStatus()).toEqual('Off')
+    })
+  })
 })

@@ -44,6 +44,14 @@ Thermostat.prototype.switchPowerSavingOff = function () {
   this.isPowerSaving = false
 }
 
+Thermostat.prototype.powerSavingStatus = function () {
+  if (this.isPowerSaving) {
+    return 'On'
+  } else {
+    return 'Off'
+  }
+}
+
 Thermostat.prototype._checkPowerSaving = function () {
   if (this.temp === this._maxTemp()) {
     throw new Error('Temperature cannot be higher than ' + this._maxTemp())

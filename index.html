@@ -32,8 +32,11 @@
         thermostat.reset();
       });
 
-      $( "#switchPowerSaving" ).click(function( event ) {
-        thermostat.switchPowerSaving();
+      $( "#switchPowerSavingOn" ).click(function( event ) {
+        thermostat.switchPowerSavingOn();
+      });
+      $( "#switchPowerSavingOff" ).click(function( event ) {
+        thermostat.switchPowerSavingOff();
       });
 
     });
@@ -52,8 +55,11 @@
       Reset
       </button>
       Power Saving Mode is <span id="power-saving-status">on</span>
-      <button id='switchPowerSaving'>
-      Power Saving
+      <button id='switchPowerSavingOn'>
+      Power Saving On
+      </button>
+      <button id='switchPowerSavingOff'>
+      Power Saving Off
       </button>
     </p>
   </section>
