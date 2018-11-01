@@ -46,11 +46,19 @@ $( document ).ready(function() {
       url: "http://localhost:4567/temperature",
 
     }).done(function (num) {
-      thermostat.temp = num;
+      console.log('working')
+      console.log(num)
+      console.log("")
+
+      if (num === "") {
+        thermostat.temp = 20;
+      } else {
+        thermostat.temp = num;
+      }
+
       $('#temperature').text( thermostat.temp )
       $('#temperature').attr('class', thermostat.usage())
-    });
-
+    })
 
   }
 

@@ -12,7 +12,6 @@ class Server < Sinatra::Base
  set :expose_headers, "location,link"
 
  get "/temperature" do
-   p $current_temp
    $current_temp
  end
 
@@ -24,4 +23,19 @@ class Server < Sinatra::Base
 
  run! if app_file == $0
 
+ def temperature
+
+ end
+
+end
+
+class Settings
+
+  def self.temperature
+    @Temperature
+  end
+
+  def self.set_temperature(number)
+    @temperature = number
+  end
 end
