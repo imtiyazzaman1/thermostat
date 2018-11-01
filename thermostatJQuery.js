@@ -46,20 +46,8 @@ $( document ).ready(function() {
       url: "http://localhost:4567/temperature",
       dataType: "json",
     }).done(function (num) {
-      // console.log('working')
-      // console.log(num)
-      // console.log("")
-      //
-      // if (num === "") {
-      //   console.log(1)
-      //   thermostat.temp = 20;
-      // } else {
-      //   console.log(2)
-      //
-      //   thermostat.temp = num;
-      // }
-
-      $('#temperature').text( num.temp )
+      thermostat.temp = num.temp;
+      $('#temperature').text( thermostat.temp )
       $('#temperature').attr('class', thermostat.usage())
     })
 
