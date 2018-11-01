@@ -44,19 +44,22 @@ $( document ).ready(function() {
   function getTemp() {
     $.ajax({
       url: "http://localhost:4567/temperature",
-
+      dataType: "json",
     }).done(function (num) {
-      console.log('working')
-      console.log(num)
-      console.log("")
+      // console.log('working')
+      // console.log(num)
+      // console.log("")
+      //
+      // if (num === "") {
+      //   console.log(1)
+      //   thermostat.temp = 20;
+      // } else {
+      //   console.log(2)
+      //
+      //   thermostat.temp = num;
+      // }
 
-      if (num === "") {
-        thermostat.temp = 20;
-      } else {
-        thermostat.temp = num;
-      }
-
-      $('#temperature').text( thermostat.temp )
+      $('#temperature').text( num.temp )
       $('#temperature').attr('class', thermostat.usage())
     })
 
