@@ -4,42 +4,32 @@
 
 <head>
    <title>Thermostat</title>
-   <style>
-      .low-usage { color: green; }
-      .medium-usage { color: black; }
-      .high-usage { color: red; }
-   </style>
+   <link rel="stylesheet" href="./css/master.css">
 </head>
 
 <body>
-  <section>
+  <div id="main">
     <h1>Type in your city</h1>
+
     <form id='city-input-form'>
       <input type="text" id="city-input" placeholder="city">
       <input type="submit" value="Get Weather">
     </form>
 
     <h1 id='weather'></h1>
-    <h1 id='temperature'>20</h1>
+    <h1 id='temperature'></h1>
     <p>
-      <button id='tempUp'>
-      Up
-      </button>
-      <button id='tempDown'>
-      Down
-      </button>
-      <button id='reset'>
-      Reset
-      </button>
+      <button id='tempUp'>Up</button>
+      <button id='tempDown'>Down</button>
+      <button id='reset'>Reset</button>
+
       Power Saving Mode is <span id="power-saving-status">on</span>
-      <button id='switchPowerSavingOn'>
-      Power Saving On
-      </button>
-      <button id='switchPowerSavingOff'>
-      Power Saving Off
-      </button>
+
+      <button id='switchPowerSavingOn'>Power Saving On</button>
+      <button id='switchPowerSavingOff'>Power Saving Off</button>
     </p>
-  </section>
+  </div>
+
   <script src='./src/Thermostat.js'></script>
   <script src="js/jquery.js"></script>
   <script src="thermostatJQuery.js"></script>

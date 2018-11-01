@@ -1,8 +1,7 @@
 $( document ).ready(function() {
-
   var thermostat = new Thermostat();
+  getTemp();
 
-  $('#temperature').text( thermostat.temp )
 
   $(document).click(function() {
     $('#temperature').text( thermostat.temp )
@@ -11,19 +10,23 @@ $( document ).ready(function() {
 
   $( "#tempUp" ).click(function( event ) {
     thermostat.up();
+    updateTemp();
   });
 
   $( "#tempDown" ).click(function( event ) {
     thermostat.down();
+    updateTemp();
   });
 
   $( "#reset" ).click(function( event ) {
     thermostat.reset();
+    updateTemp();
   });
 
   $( "#switchPowerSavingOn" ).click(function( event ) {
     thermostat.switchPowerSavingOn();
     $('#power-saving-status').text("on")
+    updateTemp();
   });
 
   $( "#switchPowerSavingOff" ).click(function( event ) {
@@ -36,7 +39,20 @@ $( document ).ready(function() {
     var city = $('#city-input').val();
     console.log(city);
     getWeather(city);
-  })
+  });
+
+  function getTemp() {
+    $.ajax({
+      url: "http://localhost:4567/temperature",
+
+    }).done(function (num) {
+      thermostat.temp = num;
+      $('#temperature').text( thermostat.temp )
+      $('#temperature').attr('class', thermostat.usage())
+    });
+
+
+  }
 
   function getWeather(city) {
     var request = $.ajax({
@@ -58,5 +74,26 @@ $( document ).ready(function() {
     console.log( "Status: " + status );
     console.dir( xhr );
     });
+  }
+
+  function updateTemp() {
+    $.ajax({
+    url: "http://localhost:4567/update_temp",
+    data: {
+        temp: thermostat.temp
+    },
+    type: "POST",
+
+  })
+  .done(function( json ) {
+     $( "<h1>" ).text( json.title ).appendTo( "body" );
+     $( "<div class=\"content\">").html( json.html ).appendTo( "body" );
+  })
+  .fail(function( xhr, status, errorThrown ) {
+    alert( "Sorry, there was a problem!" );
+    console.log( "Error: " + errorThrown );
+    console.log( "Status: " + status );
+    console.dir( xhr );
+  })
   }
 });
