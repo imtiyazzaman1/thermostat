@@ -1,6 +1,8 @@
 /* eslint-env jasmine */
 'use strict'
 
+var Thermostat = require('../src/Thermostat.js');
+
 describe('Thermostat', function () {
   var thermostat
   beforeEach(function () {
@@ -8,7 +10,7 @@ describe('Thermostat', function () {
   })
 
   it('should have a starting temperature of 20', function () {
-    expect(thermostat.temp).toEqual(STARTING_TEMP)
+    expect(thermostat.temp).toEqual(thermostat.STARTING_TEMP)
   })
 
   it('should have power saving on by default', function () {
@@ -31,7 +33,7 @@ describe('Thermostat', function () {
 
   describe('.minTemp', function () {
     it('does not lower the temp below 10', function () {
-      thermostat.temp = MINIMUM_TEMP
+      thermostat.temp = thermostat.MINIMUM_TEMP
       expect(function () { thermostat.down() }).toThrow(new Error('Temperature cannot be lower than 10'))
     })
   })
@@ -39,29 +41,29 @@ describe('Thermostat', function () {
   describe('.isPowerSaving', function () {
     it('does not raise the temp above 25 when on', function () {
       thermostat.isPowerSaving = true
-      thermostat.temp = MAX_TEMP_PSM_ON
+      thermostat.temp = thermostat.MAX_TEMP_PSM_ON
       expect(function () { thermostat.up() }).toThrow(new Error('Temperature cannot be higher than 25'))
     })
 
     it('does raise the temp above 25 when off', function () {
       thermostat.isPowerSaving = false
-      thermostat.temp = MAX_TEMP_PSM_ON
+      thermostat.temp = thermostat.MAX_TEMP_PSM_ON
       thermostat.up()
       expect(thermostat.temp).toEqual(26)
     })
 
     it('does not raise the temp above 32 when off', function () {
       thermostat.isPowerSaving = false
-      thermostat.temp = MAX_TEMP_PSM_OFF
+      thermostat.temp = thermostat.MAX_TEMP_PSM_OFF
       expect(function () { thermostat.up() }).toThrow(new Error('Temperature cannot be higher than 32'))
     })
   })
 
   describe('#reset', function () {
     it('reset temperature to 20', function functionName () {
-      thermostat.temp = MAX_TEMP_PSM_ON
+      thermostat.temp = thermostat.MAX_TEMP_PSM_ON
       thermostat.reset()
-      expect(thermostat.temp).toEqual(STARTING_TEMP)
+      expect(thermostat.temp).toEqual(thermostat.STARTING_TEMP)
     })
   })
 
@@ -76,7 +78,7 @@ describe('Thermostat', function () {
     })
 
     it('should return high usage if temp above 25', function () {
-      thermostat.temp = MAX_TEMP_PSM_ON
+      thermostat.temp = thermostat.MAX_TEMP_PSM_ON
       expect(thermostat.usage()).toEqual('high-usage')
     })
   })
@@ -91,7 +93,7 @@ describe('Thermostat', function () {
       thermostat.isPowerSaving = false
       thermostat.temp = 26
       thermostat.switchPowerSavingOn()
-      expect(thermostat.temp).toEqual(MAX_TEMP_PSM_ON)
+      expect(thermostat.temp).toEqual(thermostat.MAX_TEMP_PSM_ON)
     })
   })
   describe('#switchPowerSavingoff', function () {

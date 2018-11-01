@@ -1,13 +1,13 @@
-const STARTING_TEMP = 20
-const MINIMUM_TEMP = 10
-const LOW_USAGE = 18
-const MEDIUM_USAGE = 25
-const MAX_TEMP_PSM_ON = 25
-const MAX_TEMP_PSM_OFF = 32
-
 function Thermostat () {
-  this.temp = STARTING_TEMP
-  this.minTemp = MINIMUM_TEMP
+  this.STARTING_TEMP = 20
+  this.MINIMUM_TEMP = 10
+  this.LOW_USAGE = 18
+  this.MEDIUM_USAGE = 25
+  this.MAX_TEMP_PSM_ON = 25
+  this.MAX_TEMP_PSM_OFF = 32
+
+  this.temp = this.STARTING_TEMP
+  this.minTemp = this.MINIMUM_TEMP
   this.isPowerSaving = true
 }
 
@@ -22,13 +22,13 @@ Thermostat.prototype.down = function () {
 }
 
 Thermostat.prototype.reset = function () {
-  this.temp = STARTING_TEMP
+  this.temp = this.STARTING_TEMP
 }
 
 Thermostat.prototype.usage = function () {
-  if (this.temp < LOW_USAGE) {
+  if (this.temp < this.LOW_USAGE) {
     return 'low-usage'
-  } else if (this.temp < MEDIUM_USAGE) {
+  } else if (this.temp < this.MEDIUM_USAGE) {
     return 'medium-usage'
   } else {
     return 'high-usage'
@@ -36,7 +36,7 @@ Thermostat.prototype.usage = function () {
 }
 
 Thermostat.prototype.switchPowerSavingOn = function () {
-  if (this.temp > MAX_TEMP_PSM_ON) this.temp = MAX_TEMP_PSM_ON
+  if (this.temp > this.MAX_TEMP_PSM_ON) this.temp = this.MAX_TEMP_PSM_ON
   this.isPowerSaving = true
 }
 
@@ -66,8 +66,10 @@ Thermostat.prototype._checkMinTemp = function () {
 
 Thermostat.prototype._maxTemp = function () {
   if (this.isPowerSaving) {
-    return MAX_TEMP_PSM_ON
+    return this.MAX_TEMP_PSM_ON
   } else {
-    return MAX_TEMP_PSM_OFF
+    return this.MAX_TEMP_PSM_OFF
   }
 }
+
+module.exports = Thermostat;
