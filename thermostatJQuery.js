@@ -39,7 +39,20 @@ $( document ).ready(function() {
     var city = $('#city-input').val();
     console.log(city);
     getWeather(city);
+    postCity(city)
+    $('#current-city').text(city)
   });
+
+  function postCity(city) {
+    $.ajax({
+    url: "http://localhost:4567/update_city",
+    data: {
+        city: city
+    },
+    type: "POST",
+    dataType : "json",
+    })
+  }
 
   function getTemp() {
     $.ajax({
@@ -49,6 +62,8 @@ $( document ).ready(function() {
       thermostat.temp = num.temp;
       $('#temperature').text( thermostat.temp )
       $('#temperature').attr('class', thermostat.usage())
+      $('#current-city').text(num.city)
+      getWeather(num.city)
     })
 
   }
@@ -83,16 +98,6 @@ $( document ).ready(function() {
     },
     type: "POST",
 
-  })
-  .done(function( json ) {
-     $( "<h1>" ).text( json.title ).appendTo( "body" );
-     $( "<div class=\"content\">").html( json.html ).appendTo( "body" );
-  })
-  .fail(function( xhr, status, errorThrown ) {
-    alert( "Sorry, there was a problem!" );
-    console.log( "Error: " + errorThrown );
-    console.log( "Status: " + status );
-    console.dir( xhr );
-  })
+    })
   }
 });

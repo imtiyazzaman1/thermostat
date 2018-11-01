@@ -4,13 +4,20 @@ require 'sinatra/cross_origin'
 require "sinatra/cors"
 
 class Settings
-
   def self.temperature
     @temperature ||= 20
   end
 
   def self.set_temperature(number)
     @temperature = number
+  end
+
+  def self.city
+    @city ||= 'London'
+  end
+
+  def self.set_city(city)
+    @city = city
   end
 end
 
@@ -24,7 +31,7 @@ class Server < Sinatra::Base
  set :expose_headers, "location,link"
 
  get "/temperature" do
-   {"temp":Settings.temperature}.to_json
+   {"temp":Settings.temperature, "city":Settings.city}.to_json
  end
 
  post "/update_temp" do
@@ -34,13 +41,13 @@ class Server < Sinatra::Base
    redirect to '/temperature'
  end
 
- # def temperature
- #   @temp ||= 20
- # end
- #
- # def set_temperature(num)
- #   @temp = num
- # end
+ post "/update_city" do
+  puts params
+  Settings.set_city(params[:city])
+  puts Settings.city
+  redirect to '/temperature'
+
+ end
 
  run! if app_file == $0
 
